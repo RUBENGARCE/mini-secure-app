@@ -19,6 +19,11 @@ jobs:
         run: npm test
       - name: npm audit
         run: npm audit || true
+      - name: Iniciar aplicacion
+        run: |
+          npm start &
+          sleep 90
+          curl -I http://localhost:3001 || true
       - name: SAST con Semgrep
         run: |
           pip install semgrep
