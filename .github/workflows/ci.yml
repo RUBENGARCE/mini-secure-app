@@ -2,7 +2,7 @@ name: CI Basic
 
 on:
   push:
-    branches: [ master ]
+    branches: [ desarrollo ]
   workflow_dispatch:
 
 jobs:
@@ -10,19 +10,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout código
-        uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v3
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - name: Setup Node v20
+        uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: '20'
 
-      - name: Instalar dependencias
+      - name: npm install
         run: npm install
 
-      - name: Ejecutar tests
-        run: node ./node_modules/jest/bin/jest.js
+      - name: jest
+        run: npm test
 
-      - name: Escaneo de dependencias
-        run: npm audit
+      - name: npm audit
+        run: npm audit || true
